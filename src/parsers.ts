@@ -1,5 +1,5 @@
 import * as fs from "fs";
-import { Rendeles, Termek, Tetel } from "./types";
+import { Rendeles, Termek, Tetel } from "../src/types";
 
 class Parser {
   filename: string;
@@ -77,11 +77,9 @@ export class RendelesParser extends Parser {
 }
 
 export function joinTetelekWithTermekek(tetelek: Tetel[], termekek: Termek[]) {
-  return tetelek.map((tet) => {
-    return {
-      ...tet,
-      termek: (tet.termek = termekek.find((ter) => (ter.kod = tet.termekKod))),
-    };
+  tetelek.forEach((tet) => {
+    tet.termek = termekek.find((ter) => (ter.kod === tet.termekKod));
+    console.log(termekek.find((ter) => (ter.kod === tet.termekKod)));
   });
 }
 
@@ -89,11 +87,8 @@ export function joinRendelesekWithTetelek(
   rendelesek: Rendeles[],
   tetelek: Tetel[]
 ) {
-  return rendelesek.map((r) => {
-    const tetelekSub = tetelek.filter((tet) => tet.rendelesSzam == r.szam);
-    return {
-      ...r,
-      tetelek: tetelekSub,
-    };
+  rendelesek.forEach((r) => {
+    const tetelekSub = tetelek.filter((tet) => tet.rendelesSzam === r.szam);
+    r.tetelek = tetelekSub;
   });
 }

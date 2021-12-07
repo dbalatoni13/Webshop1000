@@ -7,16 +7,12 @@ import {
 } from "./parsers";
 import { Rendeles } from "./types";
 
-const termekParser = new TermekParser("./raktar.csv");
-const tetelParser = new TetelParser("./rendeles.csv");
-const rendelesParser = new RendelesParser("./rendeles.csv");
+let termekek = new TermekParser("./raktar.csv").parse();
+let tetelek = new TetelParser("./rendeles.csv").parse();
+let rendelesek = new RendelesParser("./rendeles.csv").parse();
 
-let termekek = termekParser.parse();
-let tetelek = tetelParser.parse();
-let rendelesek = rendelesParser.parse();
-
-tetelek = joinTetelekWithTermekek(tetelek, termekek);
-rendelesek = joinRendelesekWithTetelek(rendelesek, tetelek);
+joinTetelekWithTermekek(tetelek, termekek);
+joinRendelesekWithTetelek(rendelesek, tetelek);
 
 let elvegzettRendelesek: Rendeles[] = [];
 
@@ -39,4 +35,4 @@ rendelesek.forEach((r) => {
   }
 });
 
-console.log(tetelek);
+console.log(rendelesek);
