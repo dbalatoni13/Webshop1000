@@ -14,7 +14,7 @@ let rendelesek = new RendelesParser("./rendeles.csv").parse();
 joinTetelekWithTermekek(tetelek, termekek);
 joinRendelesekWithTetelek(rendelesek, tetelek);
 
-let elvegzettRendelesek: Rendeles[] = [];
+let levelekOutput = "";
 
 rendelesek.forEach((r) => {
   if (!r.tetelek) return;
@@ -27,12 +27,18 @@ rendelesek.forEach((r) => {
   });
 
   if (!hiba) {
+    let osszar = 0;
     r.tetelek.forEach((tet) => {
       if (!tet.termek) return;
       tet.termek.keszlet -= tet.mennyiseg;
+      osszar += tet.mennyiseg * tet.termek.ar;
     });
-    elvegzettRendelesek.push(r);
+
+    levelekOutput += `${r.email};A rendelését két napon belül szállítjuk. A rendelés értéke: ${osszar} Ft\r\n`;
+  } else {
+    levelekOutput +=
+      "A rendelése függő állapotba került. Hamarosan értesítjük a szállítás időpontjáról.";
   }
 });
 
-console.log(rendelesek);
+console.log(levelekOutput);
