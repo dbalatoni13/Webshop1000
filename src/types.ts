@@ -18,3 +18,8 @@ export type Termek = {
   ar: number;
   keszlet: number;
 };
+
+export type Beszerzes = {
+  kod: string;
+  mennyiseg: number;
+};

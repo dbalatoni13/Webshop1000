@@ -8,9 +8,9 @@ import {
 } from "./parsers";
 import * as fs from "fs";
 
-let termekek = new TermekParser("./raktar.csv").parse();
-let tetelek = new TetelParser("./rendeles.csv").parse();
-let rendelesek = new RendelesParser("./rendeles.csv").parse();
+const termekek = new TermekParser("./raktar.csv").parse();
+const tetelek = new TetelParser("./rendeles.csv").parse();
+const rendelesek = new RendelesParser("./rendeles.csv").parse();
 
 joinTetelekWithTermekek(tetelek, termekek);
 joinRendelesekWithTetelek(rendelesek, tetelek);
