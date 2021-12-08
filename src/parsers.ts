@@ -79,7 +79,6 @@ export class RendelesParser extends Parser {
 export function joinTetelekWithTermekek(tetelek: Tetel[], termekek: Termek[]) {
   tetelek.forEach((tet) => {
     tet.termek = termekek.find((ter) => ter.kod === tet.termekKod);
-    //console.log(termekek.find((ter) => ter.kod === tet.termekKod));
   });
 }
 
