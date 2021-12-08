@@ -93,8 +93,8 @@ class RendelesParser extends Parser {
 exports.RendelesParser = RendelesParser;
 function joinTetelekWithTermekek(tetelek, termekek) {
     tetelek.forEach((tet) => {
-        tet.termek = termekek.find((ter) => (ter.kod === tet.termekKod));
-        console.log(termekek.find((ter) => (ter.kod === tet.termekKod)));
+        tet.termek = termekek.find((ter) => ter.kod === tet.termekKod);
+        //console.log(termekek.find((ter) => ter.kod === tet.termekKod));
     });
 }
 exports.joinTetelekWithTermekek = joinTetelekWithTermekek;

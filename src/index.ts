@@ -5,7 +5,7 @@ import {
   joinTetelekWithTermekek,
   joinRendelesekWithTetelek,
 } from "./parsers";
-import { Rendeles } from "./types";
+import * as fs from "fs";
 
 let termekek = new TermekParser("./raktar.csv").parse();
 let tetelek = new TetelParser("./rendeles.csv").parse();
@@ -21,7 +21,7 @@ rendelesek.forEach((r) => {
   let hiba = false;
 
   r.tetelek.forEach((tet) => {
-    if (tet.termek && tet.mennyiseg > tet.termek.keszlet) {
+    if (!tet.termek || tet.mennyiseg > tet.termek.keszlet) {
       hiba = true;
     }
   });
@@ -36,9 +36,8 @@ rendelesek.forEach((r) => {
 
     levelekOutput += `${r.email};A rendelését két napon belül szállítjuk. A rendelés értéke: ${osszar} Ft\r\n`;
   } else {
-    levelekOutput +=
-      "A rendelése függő állapotba került. Hamarosan értesítjük a szállítás időpontjáról.";
+    levelekOutput += `${r.email};A rendelése függő állapotba került. Hamarosan értesítjük a szállítás időpontjáról.\r\n`;
   }
 });
 
-console.log(levelekOutput);
+fs.writeFileSync("./levelek.csv", levelekOutput);
